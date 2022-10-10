@@ -11,7 +11,7 @@ package Entity;
  */
 public class Author {
     private String firstname;
-    private String Lasttname;
+    private String Lastname;
 
     public Author() {
     }
@@ -24,18 +24,18 @@ public class Author {
         this.firstname = firstname;
     }
 
-    public String getLasttname() {
-        return Lasttname;
+    public String getLastname() {
+        return Lastname;
     }
 
-    public void setLasttname(String Lasttname) {
-        this.Lasttname = Lasttname;
+    public void setLastname(String Lastname) {
+        this.Lastname = Lastname;
     }
 
     @Override
     public String toString() {
         return "Author{" + "firstname=" + firstname 
-                + ", Lasttname=" + Lasttname 
+                + ", Lastname=" + Lastname 
                 + '}';
     }
     

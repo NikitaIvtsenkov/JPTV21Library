@@ -5,15 +5,27 @@
  */
 package jpyv21library;
 
+import Entity.Book;
+import java.util.Arrays;
 import java.util.Scanner;
+import managers.BookManager;
 
 /**
  *
  * @author pupil
  */
 public class App {
+    private Book[] books;
+    private final BookManager bookManager;
+    
+    public App() {
+        this.books = new Book[0];
+        bookManager = new BookManager();
+    }
+    
     public void run(){
         boolean repeat = true;
+        
         Scanner scanner = new Scanner(System.in);
         do{
             System.out.println("Список задач: ");
@@ -31,9 +43,14 @@ public class App {
                case 0:
                    repeat = false;
                    System.out.println("0. Закрыть приложение");
+                   
                    break;
                case 1:
                    System.out.println("Задача 1. Добавить книгу");
+                   
+//                   Book book = bookManager.createBook();
+                   this.books = Arrays.copyOf(this.books, this.books.length+1);
+                   this.books[this.books.length-1] = bookManager.createBook();
                    break;
                case 2:
                    System.out.println("Задача 2. Добавить читателя");
@@ -46,6 +63,7 @@ public class App {
                    break;
                case 5:
                    System.out.println("Задача 5. Список книг");
+                   bookManager.printListBooks(books);
                    break;
                default:
                    System.out.println("Выберите задачу для списка: ");

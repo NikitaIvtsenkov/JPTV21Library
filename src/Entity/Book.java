@@ -12,18 +12,18 @@ import java.util.Arrays;
  * @author pupil
  */
 public class Book {
-    String litle;
+    String title;
     Author[]authors = new Author[0];
 
     public Book() {
     }
 
-    public String getLitle() {
-        return litle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setLitle(String litle) {
-        this.litle = litle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Author[] getAuthors() {
@@ -36,7 +36,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" + "litle=" + litle 
+        return "Book{" + "title=" + title 
                 + ", authors=" + Arrays.toString(authors) 
                 + '}';
     }
