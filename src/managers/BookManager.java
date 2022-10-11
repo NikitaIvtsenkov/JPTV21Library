@@ -22,9 +22,9 @@ public class BookManager {
     
     public Book createBook(){
         Book book = new Book();
-        System.out.println("Введите название книги: ");
+        System.out.print("Введите название книги: ");
         book.setTitle(scanner.nextLine());
-        System.out.println("Введите число авторов книги: ");
+        System.out.print("Введите число авторов книги: ");
         int countAuthorsinBook = scanner.nextInt();
         scanner.nextLine();
         book.setAuthors(createAuthors(countAuthorsinBook));
@@ -35,18 +35,26 @@ public class BookManager {
         Author[] authors = new Author[countAuthorsinBook];
         for (int i = 0; i < countAuthorsinBook; i++){
             Author author = new Author();
-            System.out.println("Имя автора "+(i+1)+": ");
-            author.setFirstname(scanner.nextLine());
-            System.out.println("Фамилия автора "+(i+1)+": ");
-            author.setLastname(scanner.nextLine());
-            authors[i] = author;
+            if (countAuthorsinBook > 1){
+                System.out.print("Имя автора "+(i+1)+": ");
+                author.setFirstname(scanner.nextLine());
+                System.out.print("Фамилия автора "+(i+1)+": ");
+                author.setLastname(scanner.nextLine());
+                authors[i] = author;
+            }else{
+                System.out.print("Имя автора: ");
+                author.setFirstname(scanner.nextLine());
+                System.out.print("Фамилия автора: ");
+                author.setLastname(scanner.nextLine());
+                authors[i] = author;
+            }
         }
         return authors;
     }
     public void printListBooks(Book[] books){
         for (int i = 0; i < books.length; i++){
                        Book book = books[i];
-                       System.out.printf(i +1 +"Book{title = %s%n\t", book.getTitle());
+                       System.out.printf(i +1 +". Book{title = %s%n\t", book.getTitle());
                        System.out.println("\tAuthors = [\n\t\t");
                        for (int j = 0; j < book.getAuthors().length; j++){
                            Author author = book.getAuthors()[j];
