@@ -12,6 +12,7 @@ package Entity;
 public class Reader {
     private String firstname;
     private String Lastname;
+    private String Telephone;
 
     public Reader() {
     }
@@ -32,11 +33,19 @@ public class Reader {
         this.Lastname = Lastname;
     }
 
+    public String getTelephone() {
+        return Telephone;
+    }
+
+    public void setTelephone(String Telephone) {
+        this.Telephone = Telephone;
+    }
+
     @Override
     public String toString() {
-        return "Reader{" + "firstname=" + firstname 
-                + ", Lastname=" + Lastname 
-                + '}';
+        return "Reader{" + "firstname=" + firstname + ", Lastname=" + Lastname + ", Telephone=" + Telephone + '}';
     }
+
+    
     
 }

@@ -7,11 +7,11 @@ package jpyv21library;
 
 import Entity.Author;
 import Entity.Book;
+import Entity.Reader;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 import managers.BookManager;
+import managers.ReaderManager;
 
 /**
  *
@@ -20,16 +20,18 @@ import managers.BookManager;
 public class App {
     private Book[] books;
     private final BookManager bookManager;
-    
+    private Reader[] readers;
+    private final ReaderManager readerManager;
+
     public App() {
-        testAddbook();
+        testAddBook();
+        readers = new Reader[0];
         bookManager = new BookManager();
-        
+        readerManager = new ReaderManager();
     }
     
     public void run(){
         boolean repeat = true;
-        
         Scanner scanner = new Scanner(System.in);
         do{
             System.out.println("Список задач: ");
@@ -39,63 +41,65 @@ public class App {
             System.out.println("3. Выдать книгу");
             System.out.println("4. Вернуть книгу");
             System.out.println("5. Список книг");
-            System.out.println("6. Изменить авторов");
+            System.out.println("6. Список читателей");
+            System.out.println("7. Редактирование книги");
             System.out.print("Выберите номер задачи: ");
-           int task = scanner.nextInt();
-           scanner.nextLine();
-            System.out.println("_________________________");
-           switch(task){
-               case 0:
-                   repeat = false;
-                   System.out.println("0. Закрыть приложение");
-                   
-                   break;
-               case 1:
-                   System.out.println("Задача 1. Добавить книгу");
-                   
-//                   Book book = bookManager.createBook();
-                   this.books = Arrays.copyOf(this.books, this.books.length+1);
-                   this.books[this.books.length-1] = bookManager.createBook();
-                   break;
-               case 2:
-                   System.out.println("Задача 2. Добавить читателя");
-                   break;
-               case 3:
-                   System.out.println("Задача 3. Выдать книгу");
-                   break;
-               case 4:
-                   System.out.println("Задача 4. Вернуть книгу");
-                   break;
-               case 5:
-                   System.out.println("Задача 5. Список книг");
-                   bookManager.printListBooks(books);
-                   break;
-               case 6:
-                   System.out.println("Задача 6. Изменить книгу");
-                   System.out.println("Cписок книг: ");
-                   bookManager.printListBooks(books);
-//                   for(int i = 0; i<books.length;i++){
-//                       System.out.println(i+1);
-//                   }
-//                   int red = scanner.nextInt();
-//                   BookManager bookred = new BookManager;
-//                   books[red-1] = booksRed.createBook();
-                   break;
-               default:
-                   System.out.println("Выберите задачу для списка: ");
-           }
-            System.out.println("========--------========");
+            int task = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println("____________________");
+            switch (task) {
+                case 0:
+                    repeat = false;
+                    System.out.println("Задача 0. Закрыть приложение");
+                    break;
+                case 1:
+                    System.out.println("Задача 1. Добавить книгу");
+                    this.books = Arrays.copyOf(this.books, this.books.length+1);
+                    this.books[this.books.length-1] = bookManager.createBook();
+                    break;
+                case 2:
+                    System.out.println("Задача 2. Добавить читателя");
+                    this.readers = Arrays.copyOf(this.readers, this.readers.length+1);
+                    this.readers[this.readers.length-1] = readerManager.createReader();
+                    break;
+                case 3:
+                    System.out.println("Задача 3. Выдать книгу");
+                    break;
+                case 4:
+                    System.out.println("Задача 4. Вернуть книгу");
+                    break;
+                case 5:
+                    System.out.println("Задача 5. Список книг");
+                    bookManager.printListBooks(books);
+                    break;
+                case 6:
+                    System.out.println("Задача 6. Список читателей");
+                    readerManager.printListReaders(readers);
+                    break;
+                case 7:
+                    System.out.println("Задача 7. Редактирование книги");
+                    System.out.println("Список книг: ");
+                    bookManager.printListBooks(books);
+                    System.out.print("Выберите номер книги для редактирования: ");
+                    int numBookForEdit = scanner.nextInt();
+                    scanner.nextLine();
+                    books[numBookForEdit-1] = bookManager.changeBook(books[numBookForEdit-1]);
+                    break;
+                default:
+                    System.out.println("Выберите задачу из списка");
+            }
+            System.out.println("=======---------========");
         }while(repeat);
-        System.out.println("Пока, ребята");
+        System.out.println("Пока, ребята!");
     }
-    
-    private void testAddbook(){
+
+    private void testAddBook() {
         this.books = new Book[0];
         Book book = new Book();
-        book.setTitle("knigga");
+        book.setTitle("Book for editing");
         Author author = new Author();
-        author.setFirstname("ima");
-        author.setLastname("Jamilija");
+        author.setFirstname("firstname");
+        author.setLastname("lastname");
         Author[] bookAuthors = new Author[1];
         bookAuthors[0] = author;
         book.setAuthors(bookAuthors);
